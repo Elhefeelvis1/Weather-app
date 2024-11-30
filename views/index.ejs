@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/8.0.0/mdb.min.css"
+    rel="stylesheet"
+    />
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+    <style>
+      body{
+        padding-top: 50px;
+      }
+    </style>
+
+    <% if(locals.info){ %>
+    <script>
+      $(document).ready(function(){
+        const info = "<%= info.weather[0].icon %>";
+        $('img').attr('src', "http://openweathermap.org/img/w/" + info + ".png");
+      })
+    </script>
+    <% } %>
+    <title>Document</title>
+</head>
+<body>
+  <% if(locals.info){ %>
+    <div class="row d-flex justify-content-center py-5">
+        <div class="col-md-8 col-lg-6 col-xl-5">
+      
+          <div class="card text-body" style=" border-radius: 35px;">
+            <div class="card-body p-4">
+              <div class="d-flex">
+                <h6 class="flex-grow-1 testHeader"><%= info.name %></h6>
+                <h6><%= new Date().toLocaleTimeString(); %></h6>
+              </div>
+      
+              <div class="d-flex flex-column text-center mt-5 mb-4">
+                <h6 class="display-4 mb-0 font-weight-bold"> 13°C </h6>
+                <span class="small" style="color: #868B94">Stormy</span>
+              </div>
+      
+              <div class="d-flex align-items-center">
+                <div class="flex-grow-1" style="font-size: 1rem;">
+                  <div><i class="fas fa-wind fa-fw" style="color: #868B94;"></i> <span class="ms-1"> <% let windSpeed = Math.round((info.wind.speed*3600)/1000) %> 
+                    <%= windSpeed %> km/h
+                    </span>
+                  </div>
+                  <div><i class="fas fa-tint fa-fw" style="color: #868B94;"></i> <span class="ms-1"> 84%
+                    </span></div>
+                  <div><i class="fas fa-sun fa-fw" style="color: #868B94;"></i> <span class="ms-1"> 0.2h
+                    </span></div>
+                </div>
+                <div>
+                  <img src=""
+                    width="100px">
+                </div>
+            </div>
+      
+            </div>
+        </div>
+      
+        </div>
+    </div>
+  <% } %>
+    <div class="container col-lg-4"style="margin-top:40px">
+      <form action="/submit" method="post">
+        <!-- Email input -->
+        <div data-mdb-input-init class="form-outline mb-4">
+          <input type="text" id="form1Example1" class="form-control" name="city" />
+          <label class="form-label" for="form1Example1" value="Lagos">Enter City Name</label>
+        </div>
+        <!-- Password input -->
+        <div data-mdb-input-init class="form-outline mb-4">
+          <input type="text" id="form1Example2" class="form-control" name="countryCode" />
+          <label class="form-label" for="form1Example2">Enter State e.g "Rivers State"</label>
+        </div>
+      
+        <!-- Submit button -->
+        <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block">Submit</button>
+      </form>
+    </div>
+      
+
+    <!-- MDB -->
+    <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/8.0.0/mdb.umd.min.js"
+    ></script>
+    
+</body>
+</html>
