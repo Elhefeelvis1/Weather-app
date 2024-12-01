@@ -3,7 +3,7 @@ import ejs from 'ejs';
 import axios from "axios";
 
 const app = express();
-const port = process.emv.PORT;
+const port = 3000;
 const apiKey = "9e2653682c0cd4575d081fb8763a8514"
 
 app.use(express.static("public"));
