@@ -1,16 +1,21 @@
 import express from "express";
 import ejs from 'ejs';
 import axios from "axios";
+import { IPinfoWrapper } from "node-ipinfo";
 
 const app = express();
 const port = 3000;
 const apiKey = "9e2653682c0cd4575d081fb8763a8514"
+const ipinfoWrapper = new IPinfoWrapper("7a0f62f64e4007");
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-    res.render("index.ejs")
+app.get("/", async(req, res) => {
+    res.render("index.ejs");
+    const ipinfo = await ipinfoWrapper.lookupIp("102.90.103.167");
+    console.log(ipinfo.countryCode);
+    console.log(req.ip)
 })
 
 app.post("/submit", async (req, res) => {
