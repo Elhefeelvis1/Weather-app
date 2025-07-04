@@ -2,11 +2,13 @@ import express from "express";
 import ejs from 'ejs';
 import axios from "axios";
 import { IPinfoWrapper } from "node-ipinfo";
+import env from "dotenv";
 
+env.config();
 const app = express();
 const port = 3000;
-const apiKey = "9e2653682c0cd4575d081fb8763a8514"
-const ipinfoWrapper = new IPinfoWrapper("7a0f62f64e4007");
+const apiKey = process.env.API_KEY;
+const ipinfoWrapper = new IPinfoWrapper(process.env.IPINFO_KEY);
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
